@@ -1,4 +1,4 @@
-NAME = little_phonebook
+NAME = my_hitlist
 
 SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
