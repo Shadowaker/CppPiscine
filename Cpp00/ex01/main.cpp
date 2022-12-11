@@ -4,7 +4,6 @@ int main()
 {
 	HitList 		hitlist;
 	std::string		str;
-	//std::string		exit = "EXIT", add = "ADD", search = "SEARCH";
 
 	hitlist = HitList();
 	hitlist.menuHeader();
@@ -20,6 +19,8 @@ int main()
 		else
 			std::cout << "'" << str << "'" << " is not a valid instruction." << std::endl;
 		std::cout << RED "> " BLANK;
-		std::getline(std::cin, str); 
+		std::getline(std::cin, str);
+		if (std::cin.eof())
+			return (0);
 	}
 }

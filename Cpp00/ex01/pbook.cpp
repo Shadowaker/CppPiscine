@@ -1,7 +1,7 @@
 
 #include "pbook.hpp"
 
-void	showstr(std::string str, std::size_t lim)
+static void	showstr(std::string str, std::size_t lim)
 {
 
 	if (str.size() > lim)
@@ -19,9 +19,14 @@ void	showstr(std::string str, std::size_t lim)
 	}
 }
 
-int	isdigit(std::string str)
+static int	ft_isdigit(std::string str)
 {
-	return (0);
+	for (std::size_t x = 0; x < str.size(); x++)
+	{
+		if (!isdigit(str[x]))
+			return (0);
+	}
+	return (1);
 }
 
 Contact::Contact()
@@ -38,47 +43,67 @@ void	Contact::add()
 {
 	std::cout << "Enter contact first name: ";
 	std::getline(std::cin, this->FirstName);
+	if (std::cin.eof())
+		return ;
 	while(!this->FirstName.compare(""))
 	{
 		std::cout << "No empty fields allowed!" << std::endl; 
 		std::cout << "Enter contact first name: ";
 		std::getline(std::cin, this->FirstName);
+		if (std::cin.eof())
+			return ;
 	}
   
   	std::cout << "Enter contact last name: ";
 	std::getline(std::cin, this->LastName);
+	if (std::cin.eof())
+		return ;
 	while(!this->LastName.compare(""))
 	{
 		std::cout << "No empty fields allowed!" << std::endl; 
 		std::cout << "Enter contact last name: ";
 		std::getline(std::cin, this->LastName);
+		if (std::cin.eof())
+			return ;
 	}
 	
 	std::cout << "Enter contact nickname: ";
 	std::getline(std::cin, this->Nickname);
+	if (std::cin.eof())
+		return ;
 	while(!this->Nickname.compare(""))
 	{
 		std::cout << "No empty fields allowed!" << std::endl; 
 		std::cout << "Enter contact nickname: ";
 		std::getline(std::cin, this->Nickname);
+		if (std::cin.eof())
+			return ;
 	}
 	
 	std::cout << "Enter contact Phone Number: ";
 	std::getline(std::cin, this->PhoneNumber);
-	while(!this->PhoneNumber.compare(""))
+	if (std::cin.eof())
+		return ;
+	while(!ft_isdigit(this->PhoneNumber))
 	{
 		std::cout << "I need only numbers!" << std::endl; 
 		std::cout << "Enter contact Phone Number: ";
 		std::getline(std::cin, this->PhoneNumber);
+		if (std::cin.eof())
+			return ;
 	}
 	
 	std::cout << "Does he have a darkest secret? " << std::endl;
-	std::getline(std::cin, this->DarkestSecret); 
+	std::getline(std::cin, this->DarkestSecret);
+	if (std::cin.eof())
+		return ;
 	while(!this->DarkestSecret.compare(""))
 	{
 		std::cout << "No empty fields allowed!" << std::endl; 
 		std::cout << "Does he have a darkest secret? ";
 		std::getline(std::cin, this->DarkestSecret);
+		if (std::cin.eof())
+			return ;
 	}
 }
 
@@ -145,9 +170,7 @@ void HitList::add(void)
 	if (this->amount != 0)
 	{
 		for (int x = this->amount; x >= 0; x--)
-		{
 			this->contacts[x + 1] = this->contacts[x];
-		}
 	}
 	this->contacts[0] = Contact();
 	this->contacts[0].add();
@@ -186,6 +209,8 @@ void HitList::search(void)
 		else
 			this->contacts[id].display();
 		std::getline(std::cin, buf);
+		if (std::cin.eof())
+			return ;
 		std::cout << std::endl;
 	}
 }
