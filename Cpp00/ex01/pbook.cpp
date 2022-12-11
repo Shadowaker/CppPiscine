@@ -179,13 +179,6 @@ void HitList::search(void)
 		std::cout << YELLOW "> " BLANK << "Enter Index to display Informations or 8 to exit." << std::endl;
 		std::cout << YELLOW "> " BLANK;
 		std::cin >> id;
-		if (std::cin.eof())
-		{
-			std::cin.clear();
-			std::getline(std::cin, buf);
-			std::cout << YELLOW "> " BLANK << "Invalid Index." << std::endl;
-			return ;
-		}
 		if (id < 0 || (id > this->amount && id != 8))
 			std::cout << YELLOW "> " BLANK << "Invalid Index." << std::endl;
 		else if (id == 8)
