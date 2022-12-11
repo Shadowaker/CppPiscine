@@ -100,7 +100,7 @@ HitList::~HitList()
 void	HitList::menuHeader()
 {
 	std::cout << MAGENTA "-> Your personal hitlist " BLANK << std::endl;
-	std::cout << YELLOW "-> Enter your command [ADD, SEARCH, EXIT]: " BLANK << std::endl;
+	std::cout << GREEN "-> Enter your command [ADD, SEARCH, EXIT]" BLANK << std::endl;
 }
 
 void HitList::add(void)
@@ -112,9 +112,12 @@ void HitList::add(void)
 		this->contacts[7].~Contact();
 		this->amount--;
 	}
-	for (int x = this->amount; x >= 0; x++)
+	if (this->amount != 0)
 	{
-		this->contacts[x + 1] = this->contacts[x];
+		for (int x = this->amount; x >= 0; x--)
+		{
+			this->contacts[x + 1] = this->contacts[x];
+		}
 	}
 	this->contacts[0] = Contact();
 	this->contacts[0].add();
@@ -138,18 +141,18 @@ void HitList::search(void)
 	int	id;
 
 	if (this->amount == 0)
-		std::cout << RED "> " BLANK << "It seems a little empty here..." << std::endl;
+		std::cout << YELLOW "> " BLANK << "It seems a little empty here..." << std::endl;
 	else
 	{
 		this->show();
-		std::cout << RED "> " BLANK << "Enter Index to display Informations or 0 to Exit" << std::endl;
-		std::cout << RED "> " BLANK;
-		while (!(std::cin >> id) || (id < 0 || id >= this->amount))
-		{
-			std::cout << "Invalid Index." << std::endl;
-			std::cout << RED "> " BLANK;
-		}
-		std::cout << std::endl;
-		this->contacts[id].display();
+		std::cout << YELLOW "> " BLANK << "Enter Index to display Informations or 8 to exit" << std::endl;
+		std::cout << YELLOW "> " BLANK;
+		std::cin >> id;
+		if (id < 0 || (id > this->amount && id != 8))
+			std::cout << YELLOW "> " BLANK << "Invalid Index." << std::endl;
+		else if (id == 8)
+			return ;
+		else
+			this->contacts[id].display();
 	}
 }
