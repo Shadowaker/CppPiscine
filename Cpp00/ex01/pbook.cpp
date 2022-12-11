@@ -19,6 +19,11 @@ void	showstr(std::string str, std::size_t lim)
 	}
 }
 
+int	isdigit(std::string str)
+{
+	return (0);
+}
+
 Contact::Contact()
 {
 	;
@@ -33,23 +38,48 @@ void	Contact::add()
 {
 	std::cout << "Enter contact first name: ";
 	std::getline(std::cin, this->FirstName);
-	std::cout << std::endl;
+	while(!this->FirstName.compare(""))
+	{
+		std::cout << "No empty fields allowed!" << std::endl; 
+		std::cout << "Enter contact first name: ";
+		std::getline(std::cin, this->FirstName);
+	}
   
   	std::cout << "Enter contact last name: ";
-	std::getline(std::cin, this->LastName); 
-	std::cout << std::endl;
-
+	std::getline(std::cin, this->LastName);
+	while(!this->LastName.compare(""))
+	{
+		std::cout << "No empty fields allowed!" << std::endl; 
+		std::cout << "Enter contact last name: ";
+		std::getline(std::cin, this->LastName);
+	}
+	
 	std::cout << "Enter contact nickname: ";
-	std::getline(std::cin, this->Nickname); 
-	std::cout << std::endl;
-
+	std::getline(std::cin, this->Nickname);
+	while(!this->Nickname.compare(""))
+	{
+		std::cout << "No empty fields allowed!" << std::endl; 
+		std::cout << "Enter contact nickname: ";
+		std::getline(std::cin, this->Nickname);
+	}
+	
 	std::cout << "Enter contact Phone Number: ";
 	std::getline(std::cin, this->PhoneNumber);
-	std::cout << std::endl;
-
-	std::cout << "Does he have a darkest secret?" << std::endl;
+	while(!this->PhoneNumber.compare(""))
+	{
+		std::cout << "I need only numbers!" << std::endl; 
+		std::cout << "Enter contact Phone Number: ";
+		std::getline(std::cin, this->PhoneNumber);
+	}
+	
+	std::cout << "Does he have a darkest secret? " << std::endl;
 	std::getline(std::cin, this->DarkestSecret); 
-	std::cout << std::endl;
+	while(!this->DarkestSecret.compare(""))
+	{
+		std::cout << "No empty fields allowed!" << std::endl; 
+		std::cout << "Does he have a darkest secret? ";
+		std::getline(std::cin, this->DarkestSecret);
+	}
 }
 
 void	Contact::show(int id)
@@ -76,13 +106,13 @@ void	Contact::display()
 	std::cout << "First Name: ";
 	showstr(this->FirstName, this->FirstName.size());
 	std::cout << std::endl << "Last Name: ";
-	showstr(this->FirstName, this->FirstName.size());
+	showstr(this->LastName, this->LastName.size());
 	std::cout << std::endl << "Nickname: ";
-	showstr(this->FirstName, this->FirstName.size());
+	showstr(this->Nickname, this->Nickname.size());
 	std::cout << std::endl << "Phone Number: ";
-	showstr(this->FirstName, this->FirstName.size());
+	showstr(this->PhoneNumber, this->PhoneNumber.size());
 	std::cout << std::endl << "Darkest Secret: ";
-	showstr(this->FirstName, this->FirstName.size());
+	showstr(this->DarkestSecret, this->DarkestSecret.size());
 	std::cout << std::endl;
 }
 
@@ -138,21 +168,31 @@ void HitList::show(void)
 
 void HitList::search(void)
 {
-	int	id;
+	int			id;
+	std::string	buf;
 
 	if (this->amount == 0)
 		std::cout << YELLOW "> " BLANK << "It seems a little empty here..." << std::endl;
 	else
 	{
 		this->show();
-		std::cout << YELLOW "> " BLANK << "Enter Index to display Informations or 8 to exit" << std::endl;
+		std::cout << YELLOW "> " BLANK << "Enter Index to display Informations or 8 to exit." << std::endl;
 		std::cout << YELLOW "> " BLANK;
 		std::cin >> id;
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			std::getline(std::cin, buf);
+			std::cout << YELLOW "> " BLANK << "Invalid Index." << std::endl;
+			return ;
+		}
 		if (id < 0 || (id > this->amount && id != 8))
 			std::cout << YELLOW "> " BLANK << "Invalid Index." << std::endl;
 		else if (id == 8)
-			return ;
+			;
 		else
 			this->contacts[id].display();
+		std::getline(std::cin, buf);
+		std::cout << std::endl;
 	}
 }
