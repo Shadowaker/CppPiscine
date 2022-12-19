@@ -4,7 +4,7 @@
 
 int main()
 {
-	int	times = 3;
+	int	times = 6;
 
 	std::cout << "Watchout! Zombies!" << std::endl;
 	
