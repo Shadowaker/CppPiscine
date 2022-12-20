@@ -6,15 +6,14 @@ int	main(void)
 {
 	std::string	str = "HI THIS IS BRAIN";
 	std::string	*ptr;
-	std::string *ref;
+	std::string &ref = str;
 
 	ptr = &str;
-	ref = &str;
 	std::cout << &str << std::endl;
 	std::cout << &ptr << std::endl;
 	std::cout << &ref << std::endl << std::endl;
 
 	std::cout << str << std::endl;
 	std::cout << *ptr << std::endl;
-	std::cout << *ref << std::endl;
+	std::cout << ref << std::endl;
 }
