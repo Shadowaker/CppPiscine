@@ -32,7 +32,7 @@ static std::string	freplace(std::string str, std::string src, std::string pst)
 	std::string	res;
 	std::string buff;
 
-	for (int x=0; x <= str.size(); x++)
+	for (int x=0; x < str.size(); x++)
 	{
 		if (str[x] == src[0])
 		{
@@ -51,8 +51,9 @@ static std::string	freplace(std::string str, std::string src, std::string pst)
 
 static int	putFile(std::string path, std::string str)
 {
-	std::ofstream out(path);
+	std::ofstream out;
 
+	out.open(path);
 	if (!out)
 		return (1);
 	out << str;
@@ -78,7 +79,6 @@ int mySed(std::string path, std::string s1, std::string s2)
 
 int main(int argc, char **argv)
 {
-	
 	if (argc != 4)
 		std::cout << "Not enough params";
 	else
