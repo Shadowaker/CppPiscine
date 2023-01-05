@@ -18,7 +18,7 @@
 # define MAX_SIZE 250
 # define EXIT "EXIT"
 # define ADD "ADD"
-# define SEARCH "SEARCH"   
+# define SEARCH "SEARCH"
 
 class Contact
 {
@@ -28,7 +28,7 @@ class Contact
 		std::string		Nickname;
 		std::string		PhoneNumber;
 		std::string		DarkestSecret;
-	
+
 	public:
 		Contact();
 		~Contact();
@@ -37,22 +37,5 @@ class Contact
 	void	add();
 	void	display();
 };
-
-class HitList
-{
-	private:
-		Contact	contacts[8];
-		int		amount;
-	
-	public:
-		HitList();
-		~HitList();
-		
-		void	menuHeader();
-		void	add();
-		void	search();
-		void	show();
-};
-
 
 #endif
