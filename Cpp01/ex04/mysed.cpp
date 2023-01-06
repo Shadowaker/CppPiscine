@@ -7,14 +7,14 @@ static std::string	getFile(std::string path)
 	std::string		res;
 
 	f.open(path);
-	if (!f) 
+	if (!f)
 	{
 		std::cout << "No such file";
 		res = "";
 	}
-	else 
+	else
 	{
-		while (std::getline(f, buff)) 
+		while (std::getline(f, buff))
 		{
 			if (f.eof())
 				break;
@@ -66,12 +66,12 @@ int mySed(std::string path, std::string s1, std::string s2)
 	std::string	res;
 
 	res = getFile(path);
-	
+
 	if (res != "")
 		res = freplace(res, s1, s2);
 	else
 		return (1);
-	
+
 	putFile(path.append(".replace"), res);
 	std::cout << "Done";
 	return (0);
