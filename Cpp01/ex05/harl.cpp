@@ -35,14 +35,14 @@ void	Harl::error(void)
 
 void	Harl::complain(std::string level)
 {
-	void	(Harl::*complain[4])(void) = 
+	void	(Harl::*complain[4])(void) =
 	{
 		&Harl::debug,
 		&Harl::info,
 		&Harl::warning,
 		&Harl::error
 	};
-	std::string	levels[4] = {"debug", "info", "warning", "error"};
+	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	for (int x = 0; x < 4; x++)
 	{
