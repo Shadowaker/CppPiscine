@@ -6,19 +6,19 @@
 
 class Point {
 	private:
-		const Fixed *x;
-		const Fixed *y;
+		Fixed x;
+		Fixed y;
 
 	public:
 		Point();
-		Point(float x, float y);
-		Point(const Point &toCopy);
+		Point(const float x, const float y);
+		Point(const Point &src);
 		~Point();
+		Point&  operator=(const Point &rhs);
 
-	Point	&operator=(const Point &point);
+		Fixed getX(void) const;
+		Fixed getY(void) const;
 
-	const Fixed	&getX() const;
-	const Fixed	&getY() const;
 };
 
 bool bsp(Point const a, Point const b, Point const c, Point const point);

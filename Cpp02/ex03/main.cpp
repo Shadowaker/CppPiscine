@@ -1,21 +1,32 @@
 #include "Point.hpp"
 
-int main()
+int main(void)
 {
-	Point p = Point(1, 1);
-	Point q = Point(4, 2);
-	Point r = Point(2, 5);
+	float x,y;
 
-	std::cout << "Triangle with points: " << std::endl;
-	std::cout << "P (" << p.getX() << " ; " << p.getY() << ")" << std::endl;
-	std::cout << "Q (" << q.getX() << " ; " << q.getY() << ")" << std::endl;
-	std::cout << "R (" << r.getX() << " ; " << r.getY() << ")\n" << std::endl;
-	Point in = Point(3, 2);
-	Point out = Point(1, 3);
+	Point a(0, 0);
+	Point b(10, 30);
+	Point c(20, 0);
+	Point p(10, 15);
+	Point p2(30, 15);
 
-	std::cout << "The point X (" << in.getX() << " : " << in.getY() << ") is ";
-	bsp(p, q, r, in) ? std::cout << "in." << std::endl : std::cout << "out.\n" << std::endl;
+	std::cout << "A (" << a.getX() << " ; " << a.getY() << ")" << std::endl;
+	std::cout << "B (" << b.getX() << " ; " << b.getY() << ")" << std::endl;
+	std::cout << "C (" << c.getX() << " ; " << c.getY() << ")\n" << std::endl;
 
-	std::cout << "The point Y (" << out.getX() << " : " << out.getY() << ") is ";
-	bsp(p, q, r, out) ? std::cout << "in." << std::endl : std::cout << "out." << std::endl;
+	std::cout << "P (" << b.getX() << " ; " << b.getY() << ")" << std::endl;
+	std::cout << "P2 (" << c.getX() << " ; " << c.getY() << ")\n" << std::endl;
+
+	std::cout << "P is ";
+	if (!(bsp(a, b, c, p)))
+		std::cout << "outside" << std::endl;
+	else
+		std::cout << "inside" << std::endl;
+
+	std::cout << "P2 is ";
+	if (!(bsp(a, b, c, p2)))
+		std::cout << "outside" << std::endl;
+	else
+		std::cout << "inside" << std::endl;
+	return 0;
 }

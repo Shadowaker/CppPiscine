@@ -1,27 +1,25 @@
 #include "Point.hpp"
 
-float sign (Point p1, Point p2, Point p3)
+
+static Fixed	abs_value(Fixed x)
 {
-	return (p1.getX().getRawBits() - p3.getX().getRawBits()) * (p2.getY().getRawBits() - p3.getY().getRawBits()) -
-		(p2.getX().getRawBits() - p3.getX().getRawBits()) * (p2.getY().getRawBits() - p3.getY().getRawBits());
+	if (x < 0)
+		return x * -1;
+	return x;
 }
 
-bool PointInTriangle (Point pt, Point v1, Point v2, Point v3)
-{
-	float d1, d2, d3;
-	bool has_neg, has_pos;
 
-	d1 = sign(pt, v1, v2);
-	d2 = sign(pt, v2, v3);
-	d3 = sign(pt, v3, v1);
-
-	has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
-	has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
-
-	return !(has_neg && has_pos);
+static Fixed	area(Point const a, Point const b, Point const c) {
+	return (((a.getX() * ( b.getY() - c.getY())) + (b.getX() * (c.getY() - a.getY())) + (c.getX() * ( a.getY() - b.getY()))) / 2);
 }
 
-bool bsp(Point const a, Point const b, Point const c, Point const point)
+
+bool bsp(Point const a, Point const b, Point const c, Point const p)
 {
-	return (PointInTriangle(point, a, b, c));
+	Fixed	abcArea = abs_value(area(a,b,c));
+	Fixed	abpArea = abs_value(area(a,b,p));
+	Fixed	acpArea = abs_value(area(a,c,p));
+	Fixed	bcpArea = abs_value(area(b,c,p));
+
+	return(abcArea == abpArea + acpArea + bcpArea);
 }

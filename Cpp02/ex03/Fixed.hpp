@@ -12,9 +12,9 @@ class Fixed
 
 	public:
 		Fixed();
-		Fixed(const Fixed &fixed);
 		Fixed(const int i);
 		Fixed(const float f);
+		Fixed(const Fixed &fixed);
 		~Fixed();
 
 	Fixed	&operator=(const Fixed &fixed);
