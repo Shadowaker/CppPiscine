@@ -2,11 +2,11 @@
 
 void	defaultTester()
 {
-	FragTrap		x("Mr X");
+	DiamondTrap		x("Mr X");
 	DiamondTrap		y("Mr Y");
 	int	i = 0;
 
-	std::cout << GREEN "***** Default Tester *****" BLANK << std::endl;
+	std::cout << std::endl << GREEN "***** Default Tester *****" BLANK << std::endl << std::endl;
 	while (x.getHp() > 0 && y.getHp() && i < 5)
 	{
 		if (x.getEng() > 0 && x.getHp() > 0)
@@ -21,10 +21,11 @@ void	defaultTester()
 		}
 		x.beRepaired(1);
 		y.beRepaired(1);
-		x.highFivesGuys();
-		y.highFivesGuys();
+		x.WhoAmI();
+		y.WhoAmI();
 		i++;
 	}
+	std::cout << std::endl << GREEN "***** ***** ***** *****" BLANK << std::endl << std::endl;
 }
 
 int main()

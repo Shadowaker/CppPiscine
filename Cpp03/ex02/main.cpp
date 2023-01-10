@@ -5,7 +5,7 @@ void	defaultTester()
 	FragTrap x("Mr X"), y("Mr Y");
 	int	i = 0;
 
-	std::cout << GREEN "***** Default Tester *****" BLANK << std::endl;
+	std::cout << std::endl << GREEN "***** Default Tester *****" BLANK << std::endl << std::endl;
 	while (x.getHp() > 0 && y.getHp() && i < 5)
 	{
 		if (x.getEng() > 0 && x.getHp() > 0)
@@ -24,6 +24,7 @@ void	defaultTester()
 		y.highFivesGuys();
 		i++;
 	}
+	std::cout << std::endl << GREEN "***** ***** ***** *****" BLANK << std::endl << std::endl;
 }
 
 int main()

@@ -27,6 +27,23 @@ FragTrap::FragTrap(std::string name)
 	std::cout << MAGENTA "[FragTrap] " << MAGENTA << this->name << BLANK << " wants to fight." << std::endl;
 }
 
+FragTrap &FragTrap::operator=(const FragTrap &claptrap)
+{
+	this->name = claptrap.name;
+	this->hp = claptrap.hp;
+	this->eng = claptrap.eng;
+	this->atk = claptrap.atk;
+
+	return *this;
+}
+
+FragTrap::FragTrap(const FragTrap &claptrap)
+{
+	*this = claptrap;
+	std::cout << BLUE "[ClapTrap] " BLANK << MAGENTA << this->name << BLANK << " copy borned." << std::endl;
+	return;
+}
+
 
 FragTrap::~FragTrap()
 {

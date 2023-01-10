@@ -19,6 +19,23 @@ ClapTrap::ClapTrap(std::string name)
 	std::cout << BLUE "[ClapTrap] " BLANK << MAGENTA << this->name << BLANK << " appeared." << std::endl;
 }
 
+ClapTrap &ClapTrap::operator=(const ClapTrap &claptrap)
+{
+	this->name = claptrap.name;
+	this->hp = claptrap.hp;
+	this->eng = claptrap.eng;
+	this->atk = claptrap.atk;
+
+	return *this;
+}
+
+ClapTrap::ClapTrap(const ClapTrap &claptrap)
+{
+	*this = claptrap;
+	std::cout << BLUE "[ClapTrap] " BLANK << MAGENTA << this->name << BLANK << " copy borned." << std::endl;
+	return;
+}
+
 
 ClapTrap::~ClapTrap()
 {
