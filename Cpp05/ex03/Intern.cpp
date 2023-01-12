@@ -33,12 +33,12 @@ Form *Intern::makeForm(std::string form, std::string target)
 		&Intern::makePres
 	};
 
-	for (int i = 0 ; i < 3 ; i++)
+	for (int x = 0 ; x < 3 ; x++)
 	{
-		if (form == forms[i])
+		if (form == forms[x])
 		{
-			object = (this->*constrs[i])(target);
-			std::cout << GREEN "Intern creates " << forms[i] << "." BLANK << std::endl;
+			object = (this->*constrs[x])(target);
+			std::cout << GREEN "Intern creates " << forms[x] << "." BLANK << std::endl;
 			return (object);
 		}
 	}
