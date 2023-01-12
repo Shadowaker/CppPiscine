@@ -3,13 +3,13 @@
 int	main(void)
 {
 	Bureaucrat				john("John", 1);
-	Bureaucrat				shrub("cozy", 120);
+	Bureaucrat				dan("cozy", 120);
 	Form					build("Robottino", 119, 119);
 
 	std::cout << build << std::endl;
 
-	build.signForm(shrub);
-	build.signForm(john);
+	dan.signForm(build);
+	john.signForm(build);
 
 	std::cout << build << std::endl;
 	return (0);

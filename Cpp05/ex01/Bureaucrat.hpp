@@ -2,6 +2,7 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
+# include "Form.hpp"
 
 # define RED	"\033[91m"
 # define GREEN "\033[92m"
@@ -10,6 +11,8 @@
 # define MAGENTA "\033[95m"
 # define BLANK "\033[0m"
 # define CYAN "\033[96m"
+
+class Form;
 
 class Bureaucrat
 {
@@ -33,6 +36,8 @@ class Bureaucrat
 
 	void		promote();
 	void		demote();
+
+	void	signForm(Form &form);
 
 	class GradeTooHighException : public std::exception
 	{

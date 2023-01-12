@@ -13,6 +13,8 @@
 
 # include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 	private:
@@ -21,7 +23,6 @@ class Form
 		int const			min_sign;
 		int const			min_exec;
 
-		void	beSigned(Bureaucrat &bur);
 
 	protected:
 		;
@@ -39,7 +40,7 @@ class Form
 	int			getMinSign() const;
 	int			getMinExec() const;
 
-	void	signForm(Bureaucrat &bur);
+	void	beSigned(Bureaucrat &bur);
 
 
 	class GradeTooHighException : public std::exception

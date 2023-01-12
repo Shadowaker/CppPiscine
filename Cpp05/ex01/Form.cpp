@@ -65,22 +65,6 @@ void	Form::beSigned(Bureaucrat &bur)
 		this->issigned = true;
 }
 
-void	Form::signForm(Bureaucrat &bur)
-{
-	Form::GradeTooHighException	e;
-
-	try
-	{
-		this->beSigned(bur);
-		std::cout << YELLOW << bur.getName() << " signed " GREEN << this->name << BLANK << std::endl;
-		return ;
-	}
-	catch (Form::GradeTooHighException &e) {}
-	catch (Form::GradeTooLowException &e) {}
-	std::cout << YELLOW << bur.getName() << BLANK " couldn't sign " RED << this->name << BLANK " because: " RED << e.what() << BLANK << std::endl;
-
-}
-
 std::ostream &operator<<(std::ostream &out, const Form &form)
 {
 	out << std::endl;

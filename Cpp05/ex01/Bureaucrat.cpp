@@ -58,6 +58,22 @@ void	Bureaucrat::demote()
 	this->grade++;
 }
 
+void	Bureaucrat::signForm(Form &form)
+{
+	Form::GradeTooHighException	e;
+
+	try
+	{
+		form.beSigned(*this);
+		std::cout << YELLOW << this->name << " signed " GREEN << form.getName() << BLANK << std::endl;
+		return ;
+	}
+	catch (Form::GradeTooHighException &e) {}
+	catch (Form::GradeTooLowException &e) {}
+	std::cout << YELLOW << this->name << BLANK " couldn't sign " RED << form.getName() << BLANK " because: " RED << e.what() << BLANK << std::endl;
+
+}
+
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bur)
 {
 	out <<  bur.getName() << " bureaucrat grade: " << bur.getGrade();
