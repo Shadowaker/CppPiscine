@@ -75,7 +75,8 @@ std::string		StoAll::toInt(std::string str)
 
 	if (str.size() == 1)
 	{
-		return (std::to_string(str[0]));
+		if (str[0] < 48 || str[0] > 57)
+			return (std::to_string(str[0]));
 	}
 
 	char	s[str.size()];
@@ -87,6 +88,8 @@ std::string		StoAll::toInt(std::string str)
 
 	if (n > 2147483647 || n < -2147483648)
 		return ("Outside Int range");
+
+
 
 	return (std::to_string(n));
 }
@@ -102,8 +105,10 @@ std::string		StoAll::toFloat(std::string str)
 
 	if (str.size() == 1)
 	{
-		std::cout << "culo" << std::endl;
-		float d = char(str[0]);
+		if (str[0] < 48 || str[0] > 57)
+			float d = char(str[0]);
+		else
+			return(str + "f");
 		ss << d;
 		std::string s(ss.str());
 		return (s + "f");
@@ -133,8 +138,10 @@ std::string		StoAll::toDouble(std::string str)
 
 	if (str.size() == 1)
 	{
-		std::cout << "culo" << std::endl;
-		double d = char(str[0]);
+		if (str[0] < 48 || str[0] > 57)
+			double d = char(str[0]);
+		else
+			return(str + ".0");
 		ss << d;
 		std::string s(ss.str());
 		if (s.find('.') == s.npos && s.compare("nan"))
@@ -143,7 +150,7 @@ std::string		StoAll::toDouble(std::string str)
 	}
 	try
 	{
-		double d = std::stof(str);
+		double d = std::stod(str);
 		std::cout << d << std::endl;
 		ss << d;
 		std::string s(ss.str());
