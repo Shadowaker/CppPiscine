@@ -46,8 +46,11 @@ std::string		StoAll::toChar(std::string str)
 	if (!(str.compare("-inf") || str.compare("+inf") || str.compare("-inff") || str.compare("+inff")))
 		return ("Impossible");
 
-	if (std::atoi(&str[0]) < 48 || std::atoi(&str[0]) > 57)
-		return ("Not Displayable");
+	if (str.size() == 1)
+	{
+		char c[2] = {str[0], '\0'};
+		return (c);
+	}
 
 	char	s[str.size()];
 
@@ -56,8 +59,11 @@ std::string		StoAll::toChar(std::string str)
 
 	int	n = std::atoi(s);
 
-	if (((n >= 32 && n < 48) || (n >= 58 && n < 127)))
-		return (std::to_string(n));
+	if ((n >= 32 && n < 127))
+	{
+		char c[2] = {n, '\0'};
+		return (c);
+	}
 
 	return ("Not Displayable");
 }
@@ -67,8 +73,10 @@ std::string		StoAll::toInt(std::string str)
 	if (!(str.compare("-inf") || str.compare("+inf") || str.compare("-inff") || str.compare("+inff")))
 		return ("Impossible");
 
-	if (std::atoi(&str[0]) < 48 || std::atoi(&str[0]) > 57)
-		return ("Not Displayable");
+	if (str.size() == 1)
+	{
+		return (std::to_string(str[0]));
+	}
 
 	char	s[str.size()];
 
@@ -85,39 +93,68 @@ std::string		StoAll::toInt(std::string str)
 
 std::string		StoAll::toFloat(std::string str)
 {
+	std::ostringstream	ss;
+
 	if (!(str.compare("-inf") || str.compare("-inff")))
 		return ("-inff");
 	if (!(str.compare("+inf") || str.compare("+inff")))
 		return ("+inff");
 
+	if (str.size() == 1)
+	{
+		std::cout << "culo" << std::endl;
+		float d = char(str[0]);
+		ss << d;
+		std::string s(ss.str());
+		return (s + "f");
+	}
+
 	try
 	{
 		float f = std::stof(str);
+		ss << f;
+		std::string s(ss.str());
+		return (s + "f");
 	}
 	catch (std::invalid_argument)
 	{
 		return "nanf";
 	}
-
-	return ();
 }
 
 std::string		StoAll::toDouble(std::string str)
 {
+	std::ostringstream	ss;
+
 	if (!(str.compare("-inf") || str.compare("-inff")))
 		return ("-inf");
 	if (!(str.compare("+inf") || str.compare("+inff")))
 		return ("+inf");
 
+	if (str.size() == 1)
+	{
+		std::cout << "culo" << std::endl;
+		double d = char(str[0]);
+		ss << d;
+		std::string s(ss.str());
+		if (s.find('.') == s.npos && s.compare("nan"))
+			return(s + ".0");
+		return (s);
+	}
 	try
 	{
-		double d = std::stod(str);
+		double d = std::stof(str);
+		std::cout << d << std::endl;
+		ss << d;
+		std::string s(ss.str());
+		if (s.find('.') == s.npos && s.compare("nan"))
+			return(s + ".0");
+		return (s);
 	}
 	catch (std::invalid_argument)
 	{
 		return "nan";
 	}
-	return ();
 }
 
 std::string	StoAll::getChar() const
