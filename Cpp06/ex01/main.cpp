@@ -25,7 +25,7 @@ int	main(void)
 	uintptr_t	serial = serialize(hello);
 	std::cout << "AFTER: " << std::endl;
 
-	std::cout << deserialize(serialize(hello)) << std::endl;;
 	std::cout << "SERIAL " << serialize(hello) << std::endl;
+	std::cout << deserialize(serialize(hello)) << std::endl;
 	std::cout << "DESERIAL " << deserialize(serial) << std::endl;
 }

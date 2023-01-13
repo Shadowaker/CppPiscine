@@ -2,10 +2,7 @@
 
 StoAll::StoAll()
 {
-	this->c = "Not displayable";
-	this->i = "Outside Int range";
-	this->f = "nanf";
-	this->d = "nan";
+	this->value = "culo";
 	std::cout << BLUE "[STOALL] " BLANK " Created." << std::endl;
 }
 
@@ -17,10 +14,8 @@ StoAll::StoAll(const StoAll &stoall)
 
 StoAll::StoAll(std::string str)
 {
-	this->c = this->toChar(str);
-	this->i = this->toInt(str);
-	this->f = this->toFloat(str);
-	this->d = this->toDouble(str);
+	this->value = str;
+	std::cout << BLUE "[STOALL] " BLANK " Created." << std::endl;
 }
 
 StoAll::~StoAll()
@@ -32,91 +27,85 @@ StoAll	&StoAll::operator=(const StoAll &stoall)
 {
 	if (this == &stoall)
 		return *(this);
-	this->c = stoall.c;
-	this->i = stoall.i;
-	this->f = stoall.f;
-	this->d = stoall.d;
+	this->value = stoall.value;
 	return *(this);
 	std::cout << "Copy assignment operator called" << std::endl;
 }
 
 
-std::string		StoAll::toChar(std::string str)
+std::string		StoAll::toChar() const
 {
-	if (!(str.compare("-inf") || str.compare("+inf") || str.compare("-inff") || str.compare("+inff")))
+	if (!(this->value.compare("-inf") || this->value.compare("+inf") || this->value.compare("-inff") || this->value.compare("+inff")))
 		return ("Impossible");
 
-	if (str.size() == 1)
+	if (this->value.size() == 1)
 	{
-		char c[2] = {str[0], '\0'};
-		return (c);
+		if (int(this->value[0]) < 32 || int(this->value[0]) > 126)
+			return ("Not Displayable");
+		char s[2] = {static_cast<int> (this->value[0]), '\0'};
+		return (s);
 	}
-
-	char	s[str.size()];
-
-	for (int x = 0; x < str.size(); x++)
-		s[x] = str[x];
-
-	int	n = std::atoi(s);
-
-	if ((n >= 32 && n < 127))
+	else
 	{
-		char c[2] = {n, '\0'};
-		return (c);
-	}
+		char	s[this->value.size()];
 
-	return ("Not Displayable");
+		for (int x = 0; x < this->value.size(); x++)
+			s[x] = this->value[x];
+
+		int	n = std::atoi(s);
+		char s1[2] = {n, '\0'};
+		return (s1);
+	}
 }
 
-std::string		StoAll::toInt(std::string str)
+std::string		StoAll::toInt() const
 {
-	if (!(str.compare("-inf") || str.compare("+inf") || str.compare("-inff") || str.compare("+inff")))
+	if (!(this->value.compare("-inf") || this->value.compare("+inf") || this->value.compare("-inff") || this->value.compare("+inff")))
 		return ("Impossible");
 
-	if (str.size() == 1)
+	if (this->value.size() == 1)
 	{
-		if (str[0] < 48 || str[0] > 57)
-			return (std::to_string(str[0]));
+		if (this->value[0] < 48 || this->value[0] > 57)
+			return (std::to_string(this->value[0]));
 	}
 
-	char	s[str.size()];
+	char	s[this->value.size()];
 
-	for (int x = 0; x < str.size(); x++)
-		s[x] = str[x];
+	for (int x = 0; x < this->value.size(); x++)
+		s[x] = this->value[x];
 
 	long int	n = std::atol(s);
 
 	if (n > 2147483647 || n < -2147483648)
 		return ("Outside Int range");
 
-
-
 	return (std::to_string(n));
 }
 
-std::string		StoAll::toFloat(std::string str)
+std::string		StoAll::toFloat() const
 {
 	std::ostringstream	ss;
 
-	if (!(str.compare("-inf") || str.compare("-inff")))
+	if (!(this->value.compare("-inf") || this->value.compare("-inff")))
 		return ("-inff");
-	if (!(str.compare("+inf") || str.compare("+inff")))
+	if (!(this->value.compare("+inf") || this->value.compare("+inff")))
 		return ("+inff");
 
-	if (str.size() == 1)
+	if (this->value.size() == 1)
 	{
-		if (str[0] < 48 || str[0] > 57)
-			float d = char(str[0]);
+		float f;
+		if (this->value[0] < 48 || this->value[0] > 57)
+			f = char(this->value[0]);
 		else
-			return(str + "f");
-		ss << d;
+			return(this->value + "f");
+		ss << f;
 		std::string s(ss.str());
 		return (s + "f");
 	}
 
 	try
 	{
-		float f = std::stof(str);
+		float f = std::stof(this->value);
 		ss << f;
 		std::string s(ss.str());
 		return (s + "f");
@@ -127,21 +116,23 @@ std::string		StoAll::toFloat(std::string str)
 	}
 }
 
-std::string		StoAll::toDouble(std::string str)
+std::string		StoAll::toDouble() const
 {
 	std::ostringstream	ss;
 
-	if (!(str.compare("-inf") || str.compare("-inff")))
+	if (!(this->value.compare("-inf") || this->value.compare("-inff")))
 		return ("-inf");
-	if (!(str.compare("+inf") || str.compare("+inff")))
+	if (!(this->value.compare("+inf") || this->value.compare("+inff")))
 		return ("+inf");
 
-	if (str.size() == 1)
+	if (this->value.size() == 1)
 	{
-		if (str[0] < 48 || str[0] > 57)
-			double d = char(str[0]);
+		double d;
+
+		if (this->value[0] < 48 || this->value[0] > 57)
+			d = char(this->value[0]);
 		else
-			return(str + ".0");
+			return(this->value + ".0");
 		ss << d;
 		std::string s(ss.str());
 		if (s.find('.') == s.npos && s.compare("nan"))
@@ -150,8 +141,7 @@ std::string		StoAll::toDouble(std::string str)
 	}
 	try
 	{
-		double d = std::stod(str);
-		std::cout << d << std::endl;
+		double d = std::stod(this->value);
 		ss << d;
 		std::string s(ss.str());
 		if (s.find('.') == s.npos && s.compare("nan"))
@@ -164,34 +154,14 @@ std::string		StoAll::toDouble(std::string str)
 	}
 }
 
-std::string	StoAll::getChar() const
-{
-	return this->c;
-}
-
-std::string	StoAll::getInt() const
-{
-	return this->i;
-}
-
-std::string	StoAll::getFloat() const
-{
-	return this->f;
-}
-
-std::string	StoAll::getDouble() const
-{
-	return this->d;
-}
-
 std::ostream &operator<<(std::ostream &out, const StoAll &stoall)
 {
 	out << std::endl;
 	out << "----------------------------------------" << std::endl;
-	out << "Char: " << stoall.getChar() << std::endl;
-	out << "Int: " << stoall.getInt() << std::endl;
-	out << "Float: " << stoall.getFloat() << std::endl;
-	out << "Double: " << stoall.getDouble() << std::endl;
+	out << "Char: " << stoall.toChar() << std::endl;
+	out << "Int: " << stoall.toInt() << std::endl;
+	out << "Float: " << stoall.toFloat() << std::endl;
+	out << "Double: " << stoall.toDouble() << std::endl;
 	out << "----------------------------------------" << std::endl;
 	return (out);
 }

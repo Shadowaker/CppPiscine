@@ -16,15 +16,7 @@
 class StoAll
 {
 	private:
-		std::string	c;
-		std::string	i;
-		std::string	f;
-		std::string	d;
-
-		std::string	toChar(std::string str);
-		std::string	toInt(std::string str);
-		std::string	toFloat(std::string str);
-		std::string	toDouble(std::string str);
+		std::string value;
 
 	protected:
 		;
@@ -35,11 +27,10 @@ class StoAll
 		StoAll(std::string str);
 		~StoAll();
 
-	std::string	getChar() const;
-	std::string	getInt() const;
-	std::string	getFloat() const;
-	std::string	getDouble() const;
-
+	std::string	toChar() const;
+	std::string	toInt() const;
+	std::string	toFloat() const;
+	std::string	toDouble() const;
 	StoAll	&operator=(const StoAll &n);
 
 
