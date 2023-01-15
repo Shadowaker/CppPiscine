@@ -1,14 +1,25 @@
-#include <iostream>
 
-template <typename T>
-int	easyfind(T &c, int i)
+#include <list>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+class NotFound : public std::exception
 {
-	for (int x = 0; c[x]; x++)
-	{
-		if (i == c[x])
-			return (x);
-	}
-	throw (std::out_of_range());
+	public:
+		const char* what() const throw()
+		{
+			return ("Element not found.");
+		}
+};
+
+template <class T>
+typename T::iterator easyfind(T& c, int i)
+{
+	typename T::iterator x = std::find(c.begin(), c.end(), i);
+	if (x != c.end())
+		return x;
+	throw (NotFound());
 }
 
 
